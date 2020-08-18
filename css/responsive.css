@@ -1,0 +1,10 @@
+@media (max-width: 550px) {
+    .memory {
+        padding: 20px;
+        width: 538px;
+        height: 474px;
+    }
+    .introdution {
+        width:540px;
+    }
+}
