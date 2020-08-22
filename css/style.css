@@ -82,7 +82,7 @@
     transform: rotateY(180deg);
   }
 
-  .welcome-text {
+  .overlay-text {
     top: 0;
     left: 0;
     right: 0;
@@ -92,16 +92,22 @@
     position: fixed;
     justify-content: center;
     align-items: center;
-    color: rgb(143, 142, 142);
-  }
-
-  .welcome-text:hover {
-    cursor: pointer;
     color: lightgoldenrodyellow;
   }
 
-  .welcome-text.visible {
+  .overlay-text-small {
+    font-size: .3em;
+  }
+  
+
+  .overlay-text:hover {
+    cursor: pointer;
+    color: rgb(143, 142, 142);
+  }
+
+  .overlay-text.visible {
     display: flex;
+    flex-direction: column;
     animation: overlay-grow 500ms forwards;
   }
 

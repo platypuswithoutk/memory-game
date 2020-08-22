@@ -1,5 +1,4 @@
 const cards = document.querySelectorAll('.memory-card');
-const front = document.getElementsByClassName('front');
 
 let hasFilippedCard = false;
 let lockBoard = false;
@@ -9,8 +8,8 @@ let secondCard;
 function flipCard() {
     if(lockBoard) return;
     if(this===firstCard) return;
-    console.log(this);
     this.classList.add('flip');
+    
 
     if(!hasFilippedCard) {
         hasFilippedCard = true;
@@ -30,8 +29,9 @@ if (document.readyState === 'loading') {
     } else {
         ready();
     }
+
 function ready() {
-    let overlays = Array.from(document.getElementsByClassName('welcome-text'));
+    let overlays = Array.from(document.getElementsByClassName('overlay-text'));
 
     overlays.forEach(welcome => {
         welcome.addEventListener('click', () => {
@@ -47,8 +47,8 @@ function checkForMathch() {
 
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
-    isMatch.front.style.background = "white";
-    console.log('zmian')
+    firstCard.style.backgroundColor = "yellow";
+
     secondCard.removeEventListener('click', flipCard);
 
     resetBoard();
@@ -78,4 +78,29 @@ function resetBoard() {
 })(); //IIFE
 
 cards.forEach(card => card.addEventListener('click', flipCard));
+
+    var timeLeft = 30;
+    var elem = document.getElementById('time-remaining');
+    var timerId = setInterval(countdown, 1000);
+    
+    function countdown() {
+      if (timeLeft == -1) {
+        clearTimeout(timerId);
+        gameOver()
+      } else {
+        elem.innerHTML = timeLeft;
+        timeLeft--;
+      }
+    }
+
+    function gameOver() {
+        document.getElementById('game-over-text').classList.add('visible');
+
+    }
+    function victory() {
+        document.getElementById('victory-text').classList.add('visible');
+    } 
+
+
+    
 
