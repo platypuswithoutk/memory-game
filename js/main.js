@@ -1,4 +1,5 @@
 const cards = document.querySelectorAll('.memory-card');
+const front = document.getElementsByClassName('front');
 
 let hasFilippedCard = false;
 let lockBoard = false;
@@ -8,6 +9,7 @@ let secondCard;
 function flipCard() {
     if(lockBoard) return;
     if(this===firstCard) return;
+    console.log(this);
     this.classList.add('flip');
 
     if(!hasFilippedCard) {
@@ -20,7 +22,22 @@ function flipCard() {
     hasFilippedCard = false;
     secondCard = this;
 
-    checkForMathch()
+    checkForMathch();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ready());
+    } else {
+        ready();
+    }
+function ready() {
+    let overlays = Array.from(document.getElementsByClassName('welcome-text'));
+
+    overlays.forEach(welcome => {
+        welcome.addEventListener('click', () => {
+            welcome.classList.remove('visible');
+        })
+    })
 }
 
 function checkForMathch() {
@@ -30,6 +47,8 @@ function checkForMathch() {
 
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
+    isMatch.front.style.background = "white";
+    console.log('zmian')
     secondCard.removeEventListener('click', flipCard);
 
     resetBoard();
@@ -43,7 +62,7 @@ function unFlipCards() {
         secondCard.classList.remove('flip');
 
         resetBoard();
-    }, 1500)
+    }, 1000)
 }
 
 function resetBoard() {
