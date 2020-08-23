@@ -2,6 +2,9 @@ const cards = document.querySelectorAll('.memory-card');
 
 let hasFilippedCard = false;
 let lockBoard = false;
+let initTimeLeft = 20;
+let timeLeft = initTimeLeft;
+let timerId;
 let firstCard;
 let secondCard;
 
@@ -10,7 +13,6 @@ function flipCard() {
     if(this===firstCard) return;
     this.classList.add('flip');
     
-
     if(!hasFilippedCard) {
         hasFilippedCard = true;
         firstCard = this;
@@ -36,6 +38,8 @@ function ready() {
     overlays.forEach(welcome => {
         welcome.addEventListener('click', () => {
             welcome.classList.remove('visible');
+            timeLeft = initTimeLeft;
+            timerId = setInterval(counting, 1000);
             counting();
         })
     })
@@ -43,7 +47,14 @@ function ready() {
 
 function checkForMathch() {
     let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-    isMatch ? disableCards() : unFlipCards();
+    if (isMatch) {
+        disableCards();
+        if (isVictory()) {
+            victory();
+        }
+    } else {
+        unFlipCards();
+    }
 }
 
 function disableCards() {
@@ -66,6 +77,15 @@ function unFlipCards() {
     }, 1000)
 }
 
+function unFlipAllCards() {
+    lockBoard = true;
+
+    setTimeout(()=> {
+        cards.forEach(card => card.classList.remove('flip'));
+        resetBoard();
+    }, 1000)
+}
+
 function resetBoard() {
     [hasFilippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
@@ -81,29 +101,35 @@ function resetBoard() {
 cards.forEach(card => card.addEventListener('click', flipCard));
 
 function counting() {
-    var timeLeft = 30;
     var elem = document.getElementById('time-remaining');
-    var timerId = setInterval(countdown, 1000);
 
-    function countdown() {
-        if (timeLeft == -1) {
-            clearTimeout(timerId);
-            gameOver()
-        } else {
-            elem.innerHTML = timeLeft;
-            timeLeft--;
-        }
+    if (timeLeft == -1) {
+        clearInterval(timerId);
+        gameOver()
+    } else {
+        elem.innerHTML = timeLeft;
+        timeLeft--;
     }
 }
 
 function gameOver() {
     document.getElementById('game-over-text').classList.add('visible');
-
+    unFlipAllCards();
 }
+
 function victory() {
     document.getElementById('victory-text').classList.add('visible');
+    clearInterval(timerId);
 } 
 
+function isVictory() {
+    for (const card of cards) {
+        if(!card.classList.contains('flip')) {
+            return false;
+        }
+    }
+    return true;
+}
 
     
 
