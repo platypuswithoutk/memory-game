@@ -36,6 +36,7 @@ function ready() {
     overlays.forEach(welcome => {
         welcome.addEventListener('click', () => {
             welcome.classList.remove('visible');
+            counting();
         })
     })
 }
@@ -79,27 +80,29 @@ function resetBoard() {
 
 cards.forEach(card => card.addEventListener('click', flipCard));
 
+function counting() {
     var timeLeft = 30;
     var elem = document.getElementById('time-remaining');
     var timerId = setInterval(countdown, 1000);
-    
+
     function countdown() {
-      if (timeLeft == -1) {
-        clearTimeout(timerId);
-        gameOver()
-      } else {
-        elem.innerHTML = timeLeft;
-        timeLeft--;
-      }
+        if (timeLeft == -1) {
+            clearTimeout(timerId);
+            gameOver()
+        } else {
+            elem.innerHTML = timeLeft;
+            timeLeft--;
+        }
     }
+}
 
-    function gameOver() {
-        document.getElementById('game-over-text').classList.add('visible');
+function gameOver() {
+    document.getElementById('game-over-text').classList.add('visible');
 
-    }
-    function victory() {
-        document.getElementById('victory-text').classList.add('visible');
-    } 
+}
+function victory() {
+    document.getElementById('victory-text').classList.add('visible');
+} 
 
 
     
