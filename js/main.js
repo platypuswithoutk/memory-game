@@ -2,7 +2,7 @@ const cards = document.querySelectorAll('.memory-card');
 
 let hasFilippedCard = false;
 let lockBoard = false;
-let initTimeLeft = 20;
+let initTimeLeft = 30;
 let timeLeft = initTimeLeft;
 let timerId;
 let firstCard;
@@ -23,7 +23,7 @@ function flipCard() {
     hasFilippedCard = false;
     secondCard = this;
 
-    checkForMathch();
+    checkForMatch();
 }
 
 if (document.readyState === 'loading') {
@@ -35,9 +35,10 @@ if (document.readyState === 'loading') {
 function ready() {
     let overlays = Array.from(document.getElementsByClassName('overlay-text'));
 
-    overlays.forEach(welcome => {
-        welcome.addEventListener('click', () => {
-            welcome.classList.remove('visible');
+    overlays.forEach(overlayText => {
+        overlayText.addEventListener('click', () => {
+            overlayText.classList.remove('visible');
+            unFlipAllCards();
             timeLeft = initTimeLeft;
             timerId = setInterval(counting, 1000);
             counting();
@@ -45,7 +46,7 @@ function ready() {
     })
 }
 
-function checkForMathch() {
+function checkForMatch() {
     let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
     if (isMatch) {
         disableCards();
@@ -114,7 +115,6 @@ function counting() {
 
 function gameOver() {
     document.getElementById('game-over-text').classList.add('visible');
-    unFlipAllCards();
 }
 
 function victory() {
