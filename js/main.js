@@ -60,8 +60,6 @@ function checkForMatch() {
 
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
-    firstCard.style.backgroundColor = "yellow";
-
     secondCard.removeEventListener('click', flipCard);
 
     resetBoard();

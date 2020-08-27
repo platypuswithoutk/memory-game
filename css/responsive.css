@@ -1,10 +1,29 @@
 @media (max-width: 550px) {
     .memory {
-        padding: 20px;
+        padding: 20px 50px;
         width: 538px;
         height: 474px;
     }
     .introdution {
         width:540px;
+        padding-top:20px;
+    }
+
+    @keyframes overlay-grow {
+        from {
+          background-color: rgba(0, 0, 0, 0);
+          font-size: 0;
+        }
+        to {
+          background-color: rgba(0, 0, 0, .8);
+          font-size: 5em;
+          display:flex;
+        }
+      }
+}
+
+@media (min-width: 1200px) {
+    body {
+        height: 90vh;
     }
 }
