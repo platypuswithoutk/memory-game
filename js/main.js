@@ -9,6 +9,7 @@ let firstCard;
 let secondCard;
 
 function flipCard() {
+    console.log('xd')
     if(lockBoard) return;
     if(this===firstCard) return;
     this.classList.add('flip');
@@ -32,6 +33,10 @@ if (document.readyState === 'loading') {
         ready();
     }
 
+function addCardsEventListener(){
+    cards.forEach(card => card.addEventListener('click', flipCard));
+}
+
 function ready() {
     let overlays = Array.from(document.getElementsByClassName('overlay-text'));
 
@@ -42,8 +47,13 @@ function ready() {
             timeLeft = initTimeLeft;
             timerId = setInterval(counting, 1000);
             counting();
+            addCardsEventListener()
         })
     })
+    cards.forEach(card => {
+        let random = Math.floor(Math.random() * 12);
+        card.style.order = random;
+    });
 }
 
 function checkForMatch() {
@@ -78,26 +88,14 @@ function unFlipCards() {
 
 function unFlipAllCards() {
     lockBoard = true;
-
-    setTimeout(()=> {
-        cards.forEach(card => card.classList.remove('flip'));
-        resetBoard();
-    }, 1000)
+    cards.forEach(card => card.classList.remove('flip'));
+    resetBoard();
 }
 
 function resetBoard() {
     [hasFilippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
 }
-
-(function shuffle() {
-    cards.forEach(card => {
-        let random = Math.floor(Math.random() * 12);
-        card.style.order = random;
-    });
-})(); //IIFE
-
-cards.forEach(card => card.addEventListener('click', flipCard));
 
 function counting() {
     var elem = document.getElementById('time-remaining');
