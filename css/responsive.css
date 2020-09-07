@@ -1,12 +1,7 @@
-@media (max-width: 550px) {
-  .memory {
-      padding: 20px 50px;
-      width: 538px;
-      height: 474px;
-  }
-  .introdution {
-      width:540px;
-      padding-top:20px;
+
+@media (min-width: 1200px) {
+  body {
+      height: 90vh;
   }
 }
 
@@ -24,8 +19,37 @@
   }
 }
 
-@media (min-width: 1200px) {
-    body {
-        height: 90vh;
+@media (max-width: 550px) {
+  .memory {
+      padding: 20px 50px;
+      width: 538px;
+      height: 474px;
+  }
+  .introdution {
+      width:540px;
+      padding-top:20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .memory {
+    padding: 20px 0px;
+    width: 370px;
+    height: 384px;
+  }
+  .introdution {
+    width: 372px;
+  }
+
+  @keyframes overlay-grow {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
     }
+    to {
+      background-color: rgba(0, 0, 0, .8);
+      font-size: 4em;
+      display:flex;
+    }
+  }
 }
