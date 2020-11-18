@@ -1,9 +1,5 @@
 
-@media (min-width: 1200px) {
-  body {
-      height: 90vh;
-  }
-}
+
 
 @media (max-width: 630px) {
   @keyframes overlay-grow {
@@ -21,26 +17,13 @@
 
 @media (max-width: 550px) {
   .memory {
-      padding: 20px 50px;
-      width: 538px;
-      height: 474px;
+    padding: 20px 0px;
+    width: 353px;
+    height: 385px;
   }
   .introdution {
-      width:540px;
       padding-top:20px;
   }
-}
-
-@media (max-width: 360px) {
-  .memory {
-    padding: 20px 0px;
-    width: 370px;
-    height: 384px;
-  }
-  .introdution {
-    width: 372px;
-  }
-
   @keyframes overlay-grow {
     from {
       background-color: rgba(0, 0, 0, 0);
@@ -52,4 +35,13 @@
       display:flex;
     }
   }
+}
+
+@media (max-width: 360px) {
+  .memory {
+    padding: 20px 0px;
+    width: 332px;
+    height: 378px;
+  }
+
 }
